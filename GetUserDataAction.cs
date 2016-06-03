@@ -24,7 +24,7 @@
 using HutongGames.PlayMaker;
 using PlayFab;
 using PlayFab.ClientModels;
-using System.Linq;
+using UnityEngine;
 using System.Collections.Generic;
 
 namespace Sathra.PlayMaker.PlayFab {
@@ -53,11 +53,20 @@ public class GetUserDataAction : FsmStateAction {
 	}
 
 	private void OnSucces (GetUserDataResult result) {
-		data.Value = result.Data[key.Value].Value;
+		UserDataRecord record = null;
+
+		if (result.Data != null) {
+			if (result.Data.TryGetValue(key.Value, out record)) {
+				data.Value = record.Value;
+			}
+		}
+		
 		Fsm.Event(successEvent);
 	}
 
 	private void OnFailure(PlayFabError error) {
+		Debug.LogError(error.ErrorMessage);
+
 		errorMessage.Value = error.ErrorMessage;
 		Fsm.Event(failureEvent);
 	}
