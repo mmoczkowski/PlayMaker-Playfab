@@ -17,4 +17,4 @@ The source code is available under MIT license. The copy of the license is attat
 
 ## Other
 
-This library was developed and open-sourced by Sathra Ltd during [Decompression](https://www.facebook.com/DecompressionTheGame) project development.
+This library was developed and open-sourced by Sathra Ltd during [Decompression](http://itunes.com/apps/decompression) project development.
