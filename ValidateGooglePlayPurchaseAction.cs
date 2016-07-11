@@ -45,7 +45,7 @@ public class ValidateGooglePlayPurchaseAction : FsmStateAction {
 			ReceiptJson = receipt.Value, 
 			Signature = signature.Value,
 			CurrencyCode = currencyCode.Value, 
-			PurchasePrice = price.Value};
+			PurchasePrice = (uint?)price.Value};
 
 		PlayFabClientAPI.ValidateGooglePlayPurchase(request, OnSucces, OnFailure);
 	}

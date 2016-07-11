@@ -56,11 +56,12 @@ public class ValidateReceiptAction : FsmStateAction {
 	}
 #elif UNITY_ANDROID
 	public override void OnEnter () {
+
 		var request = new ValidateGooglePlayPurchaseRequest() { 
 			ReceiptJson = receipt.Value, 
 			Signature = signature.Value,
 			CurrencyCode = currencyCode.Value, 
-			PurchasePrice = price.Value};
+			PurchasePrice = (uint?)price.Value};
 
 		PlayFabClientAPI.ValidateGooglePlayPurchase(request, OnSucces, OnFailure);
 	}
