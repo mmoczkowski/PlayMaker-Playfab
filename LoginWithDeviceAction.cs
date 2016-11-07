@@ -24,7 +24,6 @@
 using HutongGames.PlayMaker;
 using PlayFab;
 using PlayFab.ClientModels;
-using UnityEngine;
 
 namespace Sathra.PlayMaker.PlayFab {
 
@@ -37,6 +36,7 @@ public class LoginWithDeviceAction : FsmStateAction {
 	public FsmEvent successEvent;
 	public FsmEvent failureEvent;
 
+	[Tooltip("Player's unique PlayfabId")]
 	[UIHint(UIHint.Variable)]
 	public FsmString playFabId;
 
@@ -45,8 +45,6 @@ public class LoginWithDeviceAction : FsmStateAction {
 
 	public override void OnEnter () {
 		PlayFabSettings.TitleId = titleId.Value;
-
-
 
 #if UNITY_IOS
 		var request = new LoginWithIOSDeviceIDRequest() {
@@ -68,9 +66,16 @@ public class LoginWithDeviceAction : FsmStateAction {
 		};
 
 		PlayFabClientAPI.LoginWithAndroidDeviceID (request, OnLoginSucces, OnLoginFailure);
-#endif
+#elif UNITY_STANDALONE
+		var request = new LoginWithCustomIDRequest() {
+			TitleId = titleId.Value,
+			CustomId = UnityEngine.SystemInfo.deviceUniqueIdentifier,
+			CreateAccount = true
+		};
 
-	}
+	    PlayFabClientAPI.LoginWithCustomID(request, OnLoginSucces, OnLoginFailure);
+#endif	
+}
 
 	private void OnLoginSucces(LoginResult result) {
 		playFabId.Value = result.PlayFabId;
