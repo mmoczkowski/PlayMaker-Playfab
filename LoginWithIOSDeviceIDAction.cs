@@ -24,7 +24,6 @@
 using HutongGames.PlayMaker;
 using PlayFab;
 using PlayFab.ClientModels;
-using UnityEngine;
 
 namespace Sathra.PlayMaker.PlayFab {
 
@@ -37,6 +36,7 @@ public class LoginWithIOSDeviceIDAction : FsmStateAction {
 	public FsmEvent successEvent;
 	public FsmEvent failureEvent;
 
+	[Tooltip("Player's unique PlayfabId")]
 	[UIHint(UIHint.Variable)]
 	public FsmString playFabId;
 
@@ -48,9 +48,9 @@ public class LoginWithIOSDeviceIDAction : FsmStateAction {
 
 		var request = new LoginWithIOSDeviceIDRequest() {
 			TitleId = titleId.Value,
-			DeviceId = SystemInfo.deviceUniqueIdentifier,
-			DeviceModel = SystemInfo.deviceModel,
-			OS = SystemInfo.operatingSystem,
+			DeviceId = UnityEngine.SystemInfo.deviceUniqueIdentifier,
+			DeviceModel = UnityEngine.SystemInfo.deviceModel,
+			OS = UnityEngine.SystemInfo.operatingSystem,
 			CreateAccount = true
 		};
 
