@@ -37,7 +37,7 @@ public class LoginWithDeviceAction : FsmStateAction {
 	public FsmEvent successEvent;
 	public FsmEvent failureEvent;
 
-	[Tooltip("Player's unique PlayfabId")]
+	[HutongGames.PlayMaker.Tooltip("Player's unique PlayfabId")]
 	[UIHint(UIHint.Variable)]
 	public FsmString playFabId;
 
