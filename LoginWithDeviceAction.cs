@@ -24,6 +24,7 @@
 using HutongGames.PlayMaker;
 using PlayFab;
 using PlayFab.ClientModels;
+using UnityEngine;
 
 namespace Sathra.PlayMaker.PlayFab {
 
